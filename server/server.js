@@ -7,7 +7,7 @@ const sqlite3 = require('sqlite3').verbose(); // Import SQLite3
 // Initialize Express and HTTP server
 const app = express();
 const server = http.createServer(app);
-const webSocketServer = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({ server });
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, '..', 'public')));
@@ -35,7 +35,7 @@ db.serialize(() => {
 let codeContent = {};
 let mentorAssigned = false;
 
-webSocketServer.on('connection', (ws) => {
+wss.on('connection', (ws) => {
     console.log('New client connected');
 
     let userRole = mentorAssigned ? 'student' : 'mentor';
@@ -48,7 +48,7 @@ webSocketServer.on('connection', (ws) => {
 
         if (parsedMessage.type === 'code') {
             codeContent[parsedMessage.codeName] = parsedMessage.content;
-            webSocketServer.clients.forEach((client) => {
+            wss.clients.forEach((client) => {
                 if (client !== ws && client.readyState === WebSocket.OPEN) {
                     client.send(JSON.stringify({ type: 'code', content: codeContent[parsedMessage.codeName] }));
                 }
