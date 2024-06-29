@@ -7,7 +7,7 @@ const sqlite3 = require('sqlite3').verbose(); // Import SQLite3
 // Initialize Express and HTTP server
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const webSocketServer = new WebSocket.Server({ server });
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, '..', 'public')));
@@ -35,7 +35,7 @@ db.serialize(() => {
 let codeContent = {};
 let mentorAssigned = false;
 
-wss.on('connection', (ws) => {
+webSocketServer.on('connection', (ws) => {
     console.log('New client connected');
 
     let userRole = mentorAssigned ? 'student' : 'mentor';
@@ -48,7 +48,7 @@ wss.on('connection', (ws) => {
 
         if (parsedMessage.type === 'code') {
             codeContent[parsedMessage.codeName] = parsedMessage.content;
-            wss.clients.forEach((client) => {
+            webSocketServer.clients.forEach((client) => {
                 if (client !== ws && client.readyState === WebSocket.OPEN) {
                     client.send(JSON.stringify({ type: 'code', content: codeContent[parsedMessage.codeName] }));
                 }
@@ -67,7 +67,6 @@ wss.on('connection', (ws) => {
     });
 });
 
-const port = process.env.PORT || 3000; // Use the port provided by Railway or default to 3000
-server.listen(port, () => {
-    console.log(`Server is listening on http://localhost:${port}`);
+server.listen(3000, () => {
+    console.log('Server is listening on http://localhost:3000');
 });

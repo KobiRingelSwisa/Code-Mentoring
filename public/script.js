@@ -47,29 +47,16 @@ function loadCodeBlock(codeName) {
             userRole = message.role;
             console.log(`User role: ${userRole}`);
             const roleMessage = document.getElementById('roleMessage');
+            const codeEditor = document.getElementById('codeEditor');
+
             if (userRole === 'mentor') {
-                document.getElementById('codeEditor').setAttribute('contenteditable', 'false');
+                codeEditor.setAttribute('contenteditable', 'false');
                 roleMessage.textContent = "You are in mentor view - therefore you cannot type anything in the board.";
             } else {
-                document.getElementById('codeEditor').setAttribute('contenteditable', 'true');
+                codeEditor.setAttribute('contenteditable', 'true');
                 roleMessage.textContent = "You are in student view - you can type in the board.";
-                document.getElementById('codeEditor').addEventListener('input', function() {
-                    const code = this.innerText;
-                    webSocket.send(JSON.stringify({ type: 'code', content: code, codeName: codeName }));
-                    console.log(`Sent message to server: ${code}`);
-
-                    // Check if the code matches the solution
-                    if (code.trim() === solutions[codeName].trim()) {
-                        document.getElementById('smiley').style.display = 'block';
-                        console.log('Code matches the solution! Showing smiley face.');
-                    } else {
-                        document.getElementById('smiley').style.display = 'none';
-                        console.log('Code does not match the solution. Hiding smiley face.');
-                    }
-
-                    // Highlight syntax
-                    highlightSyntax();
-                });
+                codeEditor.removeEventListener('input', handleCodeEditorInput);
+                codeEditor.addEventListener('input', handleCodeEditorInput);
             }
         } else if (message.type === 'code') {
             const codeEditor = document.getElementById('codeEditor');
@@ -97,12 +84,46 @@ function loadCodeBlock(codeName) {
     document.getElementById('codeEditor').innerText = '';  // Ensure the editor is empty when loaded
 }
 
+function handleCodeEditorInput() {
+    const codeEditor = document.getElementById('codeEditor');
+    const code = codeEditor.innerText; // Use innerText to get the content
+    const codeName = document.getElementById('codeBlockName').textContent;
+    webSocket.send(JSON.stringify({ type: 'code', content: code, codeName: codeName }));
+    console.log(`Sent message to server: ${code}`);
+
+    // Move the cursor to the end of the content
+    moveCursorToEnd(codeEditor);
+
+    // Check if the code matches the solution
+    if (code.trim() === solutions[codeName].trim()) {
+        document.getElementById('smiley').style.display = 'block';
+        console.log('Code matches the solution! Showing smiley face.');
+    } else {
+        document.getElementById('smiley').style.display = 'none';
+        console.log('Code does not match the solution. Hiding smiley face.');
+    }
+
+    // Highlight syntax
+    highlightSyntax();
+}
+
+function moveCursorToEnd(element) {
+    const range = document.createRange();
+    const selection = window.getSelection();
+    range.selectNodeContents(element);
+    range.collapse(false);
+    selection.removeAllRanges();
+    selection.addRange(range);
+}
+
 function highlightSyntax() {
     const codeBlock = document.getElementById('codeEditor');
-    // Using innerText instead of textContent to preserve line breaks
-    const code = codeBlock.innerText;
+    const code = codeBlock.innerText; // Use innerText to get the content
     codeBlock.innerHTML = hljs.highlightAuto(code).value;
     console.log('Highlighted syntax');
+
+    // Move cursor to the end after highlighting to ensure correct position
+    moveCursorToEnd(codeBlock);
 }
 
 function goBack() {

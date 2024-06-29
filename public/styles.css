@@ -58,6 +58,7 @@ main {
   background-color: #1e1e1e;
   color: #dcdcdc;
   padding: 10px;
+  direction: ltr;
   width: 100%;
   height: 300px;
   margin-top: 20px;
