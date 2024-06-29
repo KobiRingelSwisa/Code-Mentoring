@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Mentor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Code Mentor</h1>
+        <p>Collaborative Coding Platform for Mentors and Students</p>
+    </header>
+    <main>
+        <div id="lobbyPage">
+            <h2>Select a Code Block to Work On</h2>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="openCodeBlock('Async Case')">Async Case</a></li>
+                <li><a href="javascript:void(0)" onclick="openCodeBlock('Closure Example')">Closure Example</a></li>
+                <li><a href="javascript:void(0)" onclick="openCodeBlock('Event Loop')">Event Loop</a></li>
+                <li><a href="javascript:void(0)" onclick="openCodeBlock('Promise Chain')">Promise Chain</a></li>
+            </ul>
+        </div>
+        <div id="codeBlockPage" style="display: none;">
+            <h2 id="codeBlockName"></h2>
+            <p id="problemDescription"></p>
+            <p id="roleMessage"></p>
+            <pre id="codeEditor" contenteditable="false"></pre>
+            <div id="smiley" style="display: none;">😊</div>
+            <button onclick="goBack()">Back to Lobby</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Code Mentor. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+header p {
+  margin: 5px 0 0;
+  font-size: 1.2em;
+}
+
+main {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+#lobbyPage h2, #codeBlockPage h2 {
+  font-size: 1.8em;
+  color: #333;
+}
+
+#lobbyPage ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#lobbyPage ul li {
+  margin: 10px 0;
+}
+
+#lobbyPage ul li a {
+  text-decoration: none;
+  color: #4CAF50;
+  font-size: 1.2em;
+}
+
+#lobbyPage ul li a:hover {
+  text-decoration: underline;
+}
+
+#codeEditor {
+  border: 1px solid #333;
+  background-color: #1e1e1e;
+  color: #dcdcdc;
+  padding: 10px;
+  width: 100%;
+  height: 300px;
+  margin-top: 20px;
+  overflow: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  white-space: pre-wrap;
+  outline: none;
+}
+
+#smiley {
+  font-size: 48px;
+  margin-top: 20px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+footer {
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
