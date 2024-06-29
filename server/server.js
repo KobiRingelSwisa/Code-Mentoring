@@ -67,6 +67,8 @@ webSocketServer.on('connection', (ws) => {
     });
 });
 
-server.listen(3000, () => {
-    console.log('Server is listening on http://localhost:3000');
+const port = process.env.PORT || 3000; // Use the port provided by Railway or default to 3000
+server.listen(port, () => {
+    console.log(`Server is listening on http://localhost:${port}`);
 });
+
