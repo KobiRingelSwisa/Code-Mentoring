@@ -18,7 +18,13 @@
         ]
       },
       {
-        
+        "source": "/",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Credentials",
+            "value": "true"
+          }
+        ]
       }
     ],
     "routes": []
