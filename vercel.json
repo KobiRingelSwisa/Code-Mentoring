@@ -35,7 +35,7 @@
     ],
     "rewrites": [
         {"source": "/(.*)",
-        "destination": "server/server.js"}
+        "destination": "/server/server.js"}
     ]
   }
   
