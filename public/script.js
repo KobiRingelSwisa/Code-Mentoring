@@ -33,7 +33,7 @@ function loadCodeBlock(codeName) {
 
     // Connect to WebSocket server
     //webSocket = new WebSocket('ws://localhost:3000');
-    webSocket = new WebSocket('wss://code-mentoring-git-main-kobiringelswisas-projects.vercel.app');
+    webSocket = new WebSocket('wss://code-mentoring-git-main-kobiringelswisas-projects.vercel.app:3000');
 
     webSocket.onopen = function() {
         console.log('WebSocket connected');
