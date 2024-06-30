@@ -33,7 +33,7 @@ function loadCodeBlock(codeName) {
 
     // Connect to WebSocket server
     //webSocket = new WebSocket('ws://localhost:3000');
-    webSocket = new WebSocket('wss://76.76.21.22:443');
+    webSocket = new WebSocket('ws://76.76.21.22:443');
 
     webSocket.onopen = function() {
         console.log('WebSocket connected');
