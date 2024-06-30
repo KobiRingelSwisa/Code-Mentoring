@@ -33,8 +33,8 @@ function loadCodeBlock(codeName) {
 
     // Connect to WebSocket server
     //webSocket = new WebSocket('wss://192.168.1.191:3000');
-    //webSocket = new WebSocket('wss://code-mentoring.onrender.com');
-    webSocket = new WebSocket.Server({port: 3000})
+    webSocket = new WebSocket('wss://code-mentoring.vercel.app:9000');
+    //webSocket = new WebSocket.Server({port: 3000})
 
     webSocket.onopen = function() {
         console.log('WebSocket connected');
