@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const WebSocket = require('ws');
 const path = require('path');
-const sqlite3 = require('sqlite3').verbose(); // Import SQLite3
+const sqlite3 = require('sqlite3').verbose(); 
 
 // Initialize Express and HTTP server
 const app = express();
@@ -67,8 +67,8 @@ wss.on('connection', (ws) => {
     });
 });
 
-const port = process.env.PORT || 3000; // Use the port provided by Railway or default to 3000
+const port = process.env.PORT || 3000; 
 server.listen(port, () => {
-    console.log(`Server is listening on http://localhost:${port}`);
+    console.log(`Server is listening on port ${port}`);
 });
 
